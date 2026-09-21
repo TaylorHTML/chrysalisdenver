@@ -315,12 +315,11 @@ textarea {
 
 .section-heading h2 {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Times New Roman", Times, serif;
   font-size: clamp(3rem, 7vw, 5.8rem);
-  font-weight: 900;
-  line-height: .82;
-  letter-spacing: -.065em;
-  text-transform: uppercase;
+  font-weight: 400;
+  line-height: .9;
+  letter-spacing: -.045em;
 }
 
 .section-heading > p {
@@ -1020,10 +1019,11 @@ textarea {
 
 .gallery-hero h1 {
   margin: .6rem 0 1.5rem;
+  font-family: "Times New Roman", Times, serif;
   font-size: clamp(5rem, 13vw, 11rem);
-  font-weight: 900;
-  line-height: .76;
-  letter-spacing: -.085em;
+  font-weight: 400;
+  line-height: .78;
+  letter-spacing: -.055em;
 }
 
 .gallery-hero p {
@@ -1031,6 +1031,29 @@ textarea {
   color: var(--muted);
   font-family: "Courier New", monospace;
   font-size: 12px;
+}
+
+.gallery-back-link {
+  display: inline-block;
+  margin-top: .6rem;
+  padding: 9px 12px;
+  border: 1px solid var(--ink);
+  background: var(--button-bg);
+  color: var(--button-ink);
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.gallery-back-link:visited {
+  color: var(--button-ink);
+}
+
+.gallery-back-link:hover,
+.gallery-back-link:focus-visible {
+  background: var(--button-hover);
 }
 
 .gallery-archive-section {

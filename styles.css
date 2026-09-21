@@ -649,11 +649,17 @@ textarea {
 }
 
 .photo-preview-footer {
+  position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1.5rem;
   align-items: center;
   margin-top: 1rem;
+}
+
+.photo-preview-footer .tiny-status {
+  position: absolute;
+  left: 0;
 }
 
 .view-gallery-button {
@@ -973,8 +979,8 @@ textarea {
 
 .photo-dialog .dialog-close {
   margin: 0 0 1rem auto;
-  background: var(--button-bg);
-  color: var(--button-ink);
+  background: transparent;
+  color: var(--ink);
 }
 
 .photo-dialog figure {
@@ -1001,7 +1007,11 @@ textarea {
 }
 
 .photo-dialog .dialog-close:hover,
-.photo-dialog .dialog-close:focus-visible,
+.photo-dialog .dialog-close:focus-visible {
+  background: transparent;
+  color: var(--green);
+}
+
 .photo-nav:hover,
 .photo-nav:focus-visible {
   background: var(--button-hover);
@@ -1273,8 +1283,14 @@ textarea {
   }
 
   .photo-preview-footer {
-    align-items: stretch;
+    align-items: center;
     flex-direction: column;
+  }
+
+  .photo-preview-footer .tiny-status {
+    position: static;
+    margin: 0;
+    text-align: center;
   }
 
   .view-gallery-button {

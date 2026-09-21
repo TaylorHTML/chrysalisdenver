@@ -973,6 +973,8 @@ textarea {
 
 .photo-dialog .dialog-close {
   margin: 0 0 1rem auto;
+  background: var(--button-bg);
+  color: var(--button-ink);
 }
 
 .photo-dialog figure {
@@ -992,9 +994,18 @@ textarea {
   width: 38px;
   height: 38px;
   border: 1px solid var(--ink);
-  background: var(--paper);
+  background: var(--button-bg);
+  color: var(--button-ink);
   transform: translateY(-50%);
   cursor: pointer;
+}
+
+.photo-dialog .dialog-close:hover,
+.photo-dialog .dialog-close:focus-visible,
+.photo-nav:hover,
+.photo-nav:focus-visible {
+  background: var(--button-hover);
+  color: var(--button-ink);
 }
 
 .photo-nav-prev {

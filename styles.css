@@ -315,11 +315,12 @@ textarea {
 
 .section-heading h2 {
   margin: 0;
-  font-family: "Times New Roman", Times, serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: clamp(3rem, 7vw, 5.8rem);
-  font-weight: 400;
-  line-height: .9;
-  letter-spacing: -.045em;
+  font-weight: 900;
+  line-height: .82;
+  letter-spacing: -.065em;
+  text-transform: uppercase;
 }
 
 .section-heading > p {
@@ -627,15 +628,11 @@ textarea {
 .photo-preview-card img {
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  filter: grayscale(100%);
-  transition: filter .18s ease, transform .18s ease;
+  height: auto;
 }
 
 .photo-preview-card:hover img {
-  filter: grayscale(0%);
-  transform: scale(1.01);
+  transform: none;
 }
 
 .preview-arrow {
@@ -1060,12 +1057,10 @@ textarea {
   display: block;
   width: 100%;
   height: auto;
-  filter: grayscale(100%);
-  transition: filter .18s ease, transform .18s ease;
+  transition: transform .18s ease;
 }
 
 .gallery-grid .photo-card:hover img {
-  filter: grayscale(0%);
   transform: translateY(-2px);
 }
 

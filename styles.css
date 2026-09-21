@@ -1033,29 +1033,6 @@ textarea {
   font-size: 12px;
 }
 
-.gallery-back-link {
-  display: inline-block;
-  margin-top: .6rem;
-  padding: 9px 12px;
-  border: 1px solid var(--ink);
-  background: var(--button-bg);
-  color: var(--button-ink);
-  font-family: "Courier New", monospace;
-  font-size: 10px;
-  font-weight: 700;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-.gallery-back-link:visited {
-  color: var(--button-ink);
-}
-
-.gallery-back-link:hover,
-.gallery-back-link:focus-visible {
-  background: var(--button-hover);
-}
-
 .gallery-archive-section {
   padding: 5rem 0 7rem;
 }

@@ -7,8 +7,8 @@ window.CHRYSALIS_CONFIG = {
   },
 
   photos: {
-    source: "demo", // "demo" or "cloudinary"
-    cloudName: "YOUR_CLOUDINARY_CLOUD_NAME",
+    source: "cloudinary", // "demo" or "cloudinary"
+    cloudName: "pwrhopya",
     tag: "chrysalis-gallery"
   }
 };

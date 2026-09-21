@@ -968,6 +968,11 @@ textarea {
 .photo-dialog {
   width: min(1100px, calc(100% - 20px));
   padding: 3rem 4.5rem 1.5rem;
+  border: 0;
+}
+
+.photo-dialog .dialog-close {
+  margin: 0 0 1rem auto;
 }
 
 .photo-dialog figure {

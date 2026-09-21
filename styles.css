@@ -1034,7 +1034,11 @@ textarea {
 }
 
 .gallery-archive-section {
-  padding: 5rem 0 7rem;
+  padding: 5rem 0 4rem;
+}
+
+.gallery-home-nav {
+  padding: 0 0 4rem;
 }
 
 .gallery-grid {

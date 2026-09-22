@@ -428,8 +428,8 @@ textarea {
   background:
     repeating-linear-gradient(
       -45deg,
-      rgba(25,214,0,.045) 0,
-      rgba(25,214,0,.045) 5px,
+      rgba(25,214,0,.10) 0,
+      rgba(25,214,0,.10) 5px,
       transparent 5px,
       transparent 10px
     );
@@ -1415,8 +1415,8 @@ html[data-theme="dark"] .calendar-day.has-event {
   background:
     repeating-linear-gradient(
       -45deg,
-      rgba(25,214,0,.075) 0,
-      rgba(25,214,0,.075) 5px,
+      rgba(25,214,0,.16) 0,
+      rgba(25,214,0,.16) 5px,
       transparent 5px,
       transparent 10px
     );

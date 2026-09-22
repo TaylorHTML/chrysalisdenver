@@ -739,13 +739,9 @@ textarea {
 }
 
 .booking-path-choice.is-active {
-  background: var(--green);
-  color: #101010;
-  box-shadow: none;
-}
-
-.booking-path-choice.is-active span {
-  color: #101010;
+  background: rgba(25,214,0,.10);
+  color: var(--ink);
+  box-shadow: inset 0 0 0 2px var(--green);
 }
 
 .booking-panel[hidden] {

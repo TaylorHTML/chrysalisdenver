@@ -695,6 +695,90 @@ textarea {
   display: block;
 }
 
+.booking-paths {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  border-top: 1px solid var(--ink);
+  border-left: 1px solid var(--ink);
+}
+
+.booking-path-choice {
+  min-height: 112px;
+  padding: 16px;
+  border: 0;
+  border-right: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.booking-path-choice strong {
+  display: block;
+  margin-bottom: 8px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: underline;
+}
+
+.booking-path-choice span {
+  display: block;
+  max-width: 420px;
+  color: var(--muted);
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.booking-path-choice:hover,
+.booking-path-choice:focus-visible {
+  background: rgba(25,214,0,.06);
+}
+
+.booking-path-choice.is-active {
+  background: rgba(25,214,0,.10);
+  box-shadow: inset 0 -4px 0 var(--green);
+}
+
+.booking-panel[hidden] {
+  display: none !important;
+}
+
+.artist-pool-intro {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 15px 14px;
+  border-right: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  color: var(--muted);
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+}
+
+.booking-form label.pool-consent {
+  min-height: auto;
+  display: flex;
+  grid-template-columns: none;
+  align-items: flex-start;
+  gap: 10px;
+  text-transform: none;
+}
+
+.booking-form label.pool-consent input {
+  flex: 0 0 auto;
+  width: auto;
+  margin: 2px 0 0;
+  accent-color: var(--green);
+}
+
+.booking-form label.pool-consent span {
+  line-height: 1.45;
+  text-transform: none;
+}
+
 
 .booking-form {
   width: 100%;
@@ -1311,6 +1395,10 @@ textarea {
 
   .gallery-grid {
     column-count: 1;
+  }
+
+  .booking-paths {
+    grid-template-columns: 1fr;
   }
 
   .booking-form {

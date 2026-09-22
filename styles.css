@@ -1451,7 +1451,7 @@ html[data-theme="dark"] .calendar-day.is-full {
   overflow: hidden;
 
   /* matches the SVG's actual proportions */
-  aspect-ratio: 432 / 162;
+  aspect-ratio: 390 / 162;
 }
 
 .logo-image {

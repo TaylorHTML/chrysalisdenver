@@ -437,7 +437,7 @@
 
             <label>
               <span>primary genre *</span>
-              <input name="primary_genre" required placeholder="experimental, punk, folk...">
+              <input name="primary_genre" required>
             </label>
 
             <label>
@@ -447,12 +447,12 @@
 
             <label class="full">
               <span>music link *</span>
-              <input type="url" name="music_link" required placeholder="https://">
+              <input type="text" name="music_link" required placeholder="@handle, Bandcamp, website, etc.">
             </label>
 
             <label class="full">
-              <span>instagram / website</span>
-              <input type="text" name="social_link" placeholder="@handle or https://">
+              <span>website / social</span>
+              <input type="text" name="social_link" placeholder="@handle, Bandcamp, website, etc.">
             </label>
 
             <label>
@@ -467,18 +467,8 @@
               </select>
             </label>
 
-            <label>
-              <span>general availability</span>
-              <input name="availability" placeholder="weekends, evenings, flexible...">
-            </label>
-
             <label class="full">
-              <span>equipment / setup needs</span>
-              <textarea name="equipment_needs" rows="3"></textarea>
-            </label>
-
-            <label class="full">
-              <span>tell us about your project *</span>
+              <span>tell us about it *</span>
               <textarea name="artist_description" rows="5" required></textarea>
             </label>
 

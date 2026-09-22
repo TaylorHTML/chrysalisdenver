@@ -258,92 +258,243 @@
         </div>
 
         <p>
-          Request a show, art event, comedy night, private event,
-          or something harder to categorize.
+          Propose a complete show or join the artist pool for future
+          Chrysalis lineups.
         </p>
       </div>
 
       <div class="booking-layout">
-        <form
-          id="bookingForm"
-          class="booking-form"
-          action="https://formspree.io/f/mqpkldal"
-          method="POST"
-        >
-          <input type="hidden" name="_subject" value="New Chrysalis booking request">
+        <div class="booking-paths" role="tablist" aria-label="Choose a booking path">
+          <button
+            id="showPathButton"
+            class="booking-path-choice is-active"
+            type="button"
+            role="tab"
+            aria-selected="true"
+            aria-controls="showBookingPanel"
+            data-booking-path="show"
+          >
+            <strong>Propose a show</strong>
+            <span>Request a date for a complete show, event, or lineup.</span>
+          </button>
 
-          <div class="honeypot" aria-hidden="true">
+          <button
+            id="poolPathButton"
+            class="booking-path-choice"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="artistPoolPanel"
+            data-booking-path="pool"
+          >
+            <strong>Join the artist pool</strong>
+            <span>Share your project for consideration when Chrysalis builds future lineups.</span>
+          </button>
+        </div>
+
+        <div id="showBookingPanel" class="booking-panel" role="tabpanel" aria-labelledby="showPathButton">
+          <form
+            id="bookingForm"
+            class="booking-form"
+            action="https://formspree.io/f/mqpkldal"
+            method="POST"
+          >
+            <input type="hidden" name="_subject" value="New Chrysalis booking request">
+            <input type="hidden" name="request_type" value="Propose a show">
+
+            <div class="honeypot" aria-hidden="true">
+              <label>
+                Leave this empty
+                <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+              </label>
+            </div>
+
             <label>
-              Leave this empty
-              <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+              <span>artist / organization *</span>
+              <input name="artist_or_organization" required>
             </label>
-          </div>
 
-          <label>
-            <span>artist / organization *</span>
-            <input name="artist_or_organization" required>
-          </label>
+            <label>
+              <span>contact name *</span>
+              <input name="contact_name" autocomplete="name" required>
+            </label>
 
-          <label>
-            <span>contact name *</span>
-            <input name="contact_name" autocomplete="name" required>
-          </label>
+            <label>
+              <span>email *</span>
+              <input type="email" name="email" autocomplete="email" required>
+            </label>
 
-          <label>
-            <span>email *</span>
-            <input type="email" name="email" autocomplete="email" required>
-          </label>
+            <label>
+              <span>phone</span>
+              <input type="tel" name="phone" autocomplete="tel">
+            </label>
 
-          <label>
-            <span>phone</span>
-            <input type="tel" name="phone" autocomplete="tel">
-          </label>
+            <label>
+              <span>preferred date *</span>
+              <input id="preferredDate" type="date" name="preferred_date" required>
+            </label>
 
-          <label>
-            <span>preferred date *</span>
-            <input id="preferredDate" type="date" name="preferred_date" required>
-          </label>
+            <label>
+              <span>alternate date</span>
+              <input type="date" name="alternate_date">
+            </label>
 
-          <label>
-            <span>alternate date</span>
-            <input type="date" name="alternate_date">
-          </label>
+            <label class="full">
+              <span>event type *</span>
+              <select name="event_type" required>
+                <option value="">choose one</option>
+                <option>Concert / live music</option>
+                <option>Comedy</option>
+                <option>Art event</option>
+                <option>Private event</option>
+                <option>Community event</option>
+                <option>Other</option>
+              </select>
+            </label>
 
-          <label class="full">
-            <span>event type *</span>
-            <select name="event_type" required>
-              <option value="">choose one</option>
-              <option>Concert / live music</option>
-              <option>Comedy</option>
-              <option>Art event</option>
-              <option>Private event</option>
-              <option>Community event</option>
-              <option>Other</option>
-            </select>
-          </label>
+            <label class="full">
+              <span>website / social</span>
+              <input type="text" name="link" placeholder="@handle, Bandcamp, website, etc.">
+            </label>
 
-          <label class="full">
-            <span>website / social</span>
-            <input type="text" name="link" placeholder="@handle, Bandcamp, website, etc.">
-          </label>
+            <label class="full">
+              <span>tell us about it *</span>
+              <textarea name="event_details" rows="6" required></textarea>
+            </label>
 
-          <label class="full">
-            <span>tell us about it *</span>
-            <textarea name="event_details" rows="6" required></textarea>
-          </label>
+            <div class="form-footer full">
+              <p>Submitting this form does not automatically reserve the date.</p>
+              <button id="bookingSubmit" type="submit">SEND REQUEST</button>
+            </div>
 
-          <div class="form-footer full">
-            <p>Submitting this form does not automatically reserve the date.</p>
-            <button id="bookingSubmit" type="submit">SEND REQUEST</button>
-          </div>
+            <p id="bookingStatus" class="booking-status full" role="status" aria-live="polite"></p>
+          </form>
+        </div>
 
-          <p
-            id="bookingStatus"
-            class="booking-status full"
-            role="status"
-            aria-live="polite"
-          ></p>
-        </form>
+        <div id="artistPoolPanel" class="booking-panel" role="tabpanel" aria-labelledby="poolPathButton" hidden>
+          <form
+            id="artistPoolForm"
+            class="booking-form"
+            action="https://formspree.io/f/xvkgaqov"
+            method="POST"
+          >
+            <input type="hidden" name="_subject" value="New Chrysalis artist pool submission">
+            <input type="hidden" name="request_type" value="Join the artist pool">
+
+            <div class="honeypot" aria-hidden="true">
+              <label>
+                Leave this empty
+                <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+              </label>
+            </div>
+
+            <p class="artist-pool-intro">
+              Submit once and Chrysalis may contact you when your sound fits a future
+              show or opening slot. Joining the pool does not guarantee a booking.
+            </p>
+
+            <label>
+              <span>artist / project name *</span>
+              <input name="artist_or_project" required>
+            </label>
+
+            <label>
+              <span>contact name *</span>
+              <input name="contact_name" autocomplete="name" required>
+            </label>
+
+            <label>
+              <span>email *</span>
+              <input type="email" name="email" autocomplete="email" required>
+            </label>
+
+            <label>
+              <span>phone</span>
+              <input type="tel" name="phone" autocomplete="tel">
+            </label>
+
+            <label>
+              <span>artist type *</span>
+              <select name="artist_type" required>
+                <option value="">choose one</option>
+                <option>Solo artist</option>
+                <option>Band</option>
+                <option>DJ</option>
+                <option>Producer / electronic act</option>
+                <option>Other</option>
+              </select>
+            </label>
+
+            <label>
+              <span>local or touring *</span>
+              <select name="location_type" required>
+                <option value="">choose one</option>
+                <option>Denver / local</option>
+                <option>Colorado, outside Denver</option>
+                <option>Touring</option>
+              </select>
+            </label>
+
+            <label>
+              <span>primary genre *</span>
+              <input name="primary_genre" required placeholder="experimental, punk, folk...">
+            </label>
+
+            <label>
+              <span>other genres</span>
+              <input name="secondary_genres" placeholder="separate with commas">
+            </label>
+
+            <label class="full">
+              <span>music link *</span>
+              <input type="url" name="music_link" required placeholder="https://">
+            </label>
+
+            <label class="full">
+              <span>instagram / website</span>
+              <input type="text" name="social_link" placeholder="@handle or https://">
+            </label>
+
+            <label>
+              <span>typical set length *</span>
+              <select name="set_length" required>
+                <option value="">choose one</option>
+                <option>15–20 minutes</option>
+                <option>30 minutes</option>
+                <option>45 minutes</option>
+                <option>60+ minutes</option>
+                <option>Flexible</option>
+              </select>
+            </label>
+
+            <label>
+              <span>general availability</span>
+              <input name="availability" placeholder="weekends, evenings, flexible...">
+            </label>
+
+            <label class="full">
+              <span>equipment / setup needs</span>
+              <textarea name="equipment_needs" rows="3"></textarea>
+            </label>
+
+            <label class="full">
+              <span>tell us about your project *</span>
+              <textarea name="artist_description" rows="5" required></textarea>
+            </label>
+
+            <label class="full pool-consent">
+              <input type="checkbox" name="opening_slot_interest" value="Yes" required>
+              <span>I want to be considered for future Chrysalis lineups and opening slots. *</span>
+            </label>
+
+            <div class="form-footer full">
+              <p>This adds you to a private artist pool. It is not a confirmed booking.</p>
+              <button id="artistPoolSubmit" type="submit">JOIN ARTIST POOL</button>
+            </div>
+
+            <p id="artistPoolStatus" class="booking-status full" role="status" aria-live="polite"></p>
+          </form>
+        </div>
       </div>
     </section>
 
@@ -456,6 +607,6 @@
 
   <script src="theme.js?v=1"></script>
   <script src="config.js?v=12"></script>
-  <script src="app.js?v=11"></script>
+  <script src="app.js?v=12"></script>
 </body>
 </html>

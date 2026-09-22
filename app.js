@@ -81,6 +81,12 @@ const photoNext = document.querySelector("#photoNext");
 const bookingForm = document.querySelector("#bookingForm");
 const bookingSubmit = document.querySelector("#bookingSubmit");
 const bookingStatus = document.querySelector("#bookingStatus");
+const artistPoolForm = document.querySelector("#artistPoolForm");
+const artistPoolSubmit = document.querySelector("#artistPoolSubmit");
+const artistPoolStatus = document.querySelector("#artistPoolStatus");
+const bookingPathButtons = document.querySelectorAll("[data-booking-path]");
+const showBookingPanel = document.querySelector("#showBookingPanel");
+const artistPoolPanel = document.querySelector("#artistPoolPanel");
 
 let allEvents = [];
 let galleryPhotos = [];
@@ -120,6 +126,13 @@ document.querySelector("#todayBtn").addEventListener("click", () => {
 closeEventDialog.addEventListener("click", () => eventDialog.close());
 
 bookingForm.addEventListener("submit", submitBookingForm);
+artistPoolForm.addEventListener("submit", submitArtistPoolForm);
+
+bookingPathButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    selectBookingPath(button.dataset.bookingPath);
+  });
+});
 
 /* ==========================================================
    GIF MARQUEE
@@ -369,6 +382,7 @@ function renderCalendar() {
     const requestButton = cell.querySelector("[data-request-date]");
     if (requestButton) {
       requestButton.addEventListener("click", () => {
+        selectBookingPath("show");
         preferredDate.value = requestButton.dataset.requestDate;
 
         document.querySelector("#booking").scrollIntoView({
@@ -601,41 +615,77 @@ window.addEventListener("resize", () => {
    BOOKING / FORMSPREE
    ========================================================== */
 
-async function submitBookingForm(event) {
+function selectBookingPath(path) {
+  const showPool = path === "pool";
+
+  showBookingPanel.hidden = showPool;
+  artistPoolPanel.hidden = !showPool;
+
+  bookingPathButtons.forEach(button => {
+    const isActive = button.dataset.bookingPath === path;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-selected", String(isActive));
+  });
+}
+
+function submitBookingForm(event) {
+  return submitFormspreeForm(event, {
+    button: bookingSubmit,
+    status: bookingStatus,
+    sendingLabel: "SENDING...",
+    idleLabel: "SEND REQUEST",
+    successMessage:
+      "REQUEST RECEIVED. Chrysalis will follow up if the date / event is a fit."
+  });
+}
+
+function submitArtistPoolForm(event) {
+  return submitFormspreeForm(event, {
+    button: artistPoolSubmit,
+    status: artistPoolStatus,
+    sendingLabel: "JOINING...",
+    idleLabel: "JOIN ARTIST POOL",
+    successMessage:
+      "YOU'RE IN THE ARTIST POOL. Chrysalis may contact you when your project fits a future lineup."
+  });
+}
+
+async function submitFormspreeForm(event, options) {
   event.preventDefault();
 
-  if (!bookingForm.reportValidity()) return;
+  const form = event.currentTarget;
 
-  bookingSubmit.disabled = true;
-  bookingSubmit.textContent = "SENDING...";
-  bookingStatus.textContent = "";
-  bookingStatus.className = "booking-status full";
+  if (!form.reportValidity()) return;
+
+  options.button.disabled = true;
+  options.button.textContent = options.sendingLabel;
+  options.status.textContent = "";
+  options.status.className = "booking-status full";
 
   try {
-    const response = await fetch(bookingForm.action, {
+    const response = await fetch(form.action, {
       method: "POST",
-      body: new FormData(bookingForm),
+      body: new FormData(form),
       headers: {
         Accept: "application/json"
       }
     });
 
     if (!response.ok) {
-      throw new Error(`Booking form returned ${response.status}`);
+      throw new Error(`Form submission returned ${response.status}`);
     }
 
-    bookingForm.reset();
-    bookingStatus.textContent =
-      "REQUEST RECEIVED. Chrysalis will follow up if the date / event is a fit.";
-    bookingStatus.classList.add("success");
+    form.reset();
+    options.status.textContent = options.successMessage;
+    options.status.classList.add("success");
   } catch (error) {
     console.error(error);
-    bookingStatus.textContent =
+    options.status.textContent =
       "Something went wrong. Please try again or contact Chrysalis directly.";
-    bookingStatus.classList.add("error");
+    options.status.classList.add("error");
   } finally {
-    bookingSubmit.disabled = false;
-    bookingSubmit.textContent = "SEND REQUEST";
+    options.button.disabled = false;
+    options.button.textContent = options.idleLabel;
   }
 }
 

@@ -18,9 +18,9 @@ main{width:min(1100px,calc(100% - 28px));margin:0 auto;padding:112px 0 70px}
 .kicker{margin:0 0 26px;color:var(--muted);font-size:11px;letter-spacing:.08em}
 .stage{min-height:62vh;display:grid;place-items:center}
 .logo-wrap{position:relative;width:min(980px,94vw);aspect-ratio:1000/529;display:grid;place-items:center;overflow:hidden}
-.logo-base{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;filter:invert(1)}
-html[data-theme="light"] .logo-base{filter:none}
-.logo-glow{position:absolute;inset:0;background:radial-gradient(circle,rgba(155,135,255,.42) 0%,rgba(100,135,255,.30) 25%,rgba(78,195,98,.23) 47%,rgba(78,195,98,0) 72%);background-size:58% 185%;background-repeat:no-repeat;-webkit-mask-image:url("chrysalis-logo-mask.svg");mask-image:url("chrysalis-logo-mask.svg");-webkit-mask-position:center;mask-position:center;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-size:contain;mask-size:contain;animation:glow 11s ease-in-out infinite;pointer-events:none}
+.logo-base{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;z-index:1;filter:none}
+html[data-theme="light"] .logo-base{filter:invert(1)}
+.logo-glow{position:absolute;inset:0;background:radial-gradient(circle,rgba(155,135,255,.42) 0%,rgba(100,135,255,.30) 25%,rgba(78,195,98,.23) 47%,rgba(78,195,98,0) 72%);background-size:58% 185%;background-repeat:no-repeat;-webkit-mask-image:url("chrysalis-logo-mask.svg");mask-image:url("chrysalis-logo-mask.svg");-webkit-mask-position:center;mask-position:center;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-size:contain;mask-size:contain;animation:glow 11s ease-in-out infinite;pointer-events:none;z-index:2;mix-blend-mode:screen}
 @keyframes glow{0%{background-position:-38% 55%}20%{background-position:25% 18%}45%{background-position:108% 45%}70%{background-position:55% 82%}100%{background-position:-38% 55%}}
 .note{max-width:760px;margin:36px auto 0;color:var(--muted);font-size:12px;line-height:1.7;text-align:center}
 @media(max-width:650px){main{padding-top:96px}.stage{min-height:52vh}.logo-wrap{width:96vw}}
@@ -30,8 +30,8 @@ html[data-theme="light"] .logo-base{filter:none}
 <header><a href="/">← chrysalisdenver.com</a><button class="toggle" id="toggle" type="button">[DARK] / LIGHT</button></header>
 <main>
 <p class="kicker">CHRYSALIS / LOGO TEST / SHELL REMOVED</p>
-<section class="stage"><div class="logo-wrap" role="img" aria-label="Chrysalis"><img class="logo-base" src="chrysalis-logo-mask.svg" alt=""><div class="logo-glow" aria-hidden="true"></div></div></section>
-<p class="note">This test uses the hand-drawn logo as a transparency mask. The shell on the far right has been removed. The black/white base color and the subtle moving color light are generated entirely with CSS.</p>
+<section class="stage"><div class="logo-wrap" role="img" aria-label="Chrysalis"><img class="logo-base" src="chrysalis-logo-art-noshell.png" alt=""><div class="logo-glow" aria-hidden="true"></div></div></section>
+<p class="note">This test uses the actual hand-drawn raster artwork as the visible logo, with a separate mask only for the moving color light. The shell on the far right has been removed.</p>
 </main>
 <script>
 const root=document.documentElement,t=document.querySelector("#toggle");

@@ -38,7 +38,7 @@
 
     if (instagramLink) {
       instagramLink.href = "https://www.instagram.com/chrysalis_denver/";
-      instagramLink.textContent = "@chrysalis_denver";
+      instagramLink.textContent = "instagram";
     }
 
     if (emailLink) {

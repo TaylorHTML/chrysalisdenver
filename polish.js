@@ -20,6 +20,24 @@
   const openSlotKey = document.querySelector(".key-open");
   openSlotKey?.closest("span")?.remove();
 
+  const aboutLinks = document.querySelector(".about-links");
+
+  if (aboutLinks) {
+    const links = aboutLinks.querySelectorAll("a");
+    const instagramLink = links[0];
+    const emailLink = links[1];
+
+    if (instagramLink) {
+      instagramLink.href = "https://www.instagram.com/chrysalis_denver/";
+      instagramLink.textContent = "@chrysalis_denver";
+    }
+
+    if (emailLink) {
+      emailLink.href = "mailto:chrysalisdenver@gmail.com";
+      emailLink.textContent = "chrysalisdenver@gmail.com";
+    }
+  }
+
   const dialogDescription = document.querySelector("#dialogDescription");
 
   function cleanEmptyEventDescription() {

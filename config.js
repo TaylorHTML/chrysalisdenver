@@ -1,14 +1,12 @@
 window.CHRYSALIS_CONFIG = {
   calendar: {
-    // For now the public site uses Google's embed view so Chrysalis can
-    // update the calendar without needing an API key. October 2026 is the
-    // only month exposed while November is still being worked on.
-    useGoogleCalendar: false,
+    // Temporary public embed while we wait on a Calendar API key.
     calendarId: "chrysalisdenver@gmail.com",
     timeZone: "America/Denver",
     displayStart: "2026-10-01",
     displayEnd: "2026-10-31",
-    maxPublicEventsPerDay: 2
+    maxPublicEventsPerDay: 2,
+    useGoogleCalendar: false
   },
 
   photos: {
@@ -19,11 +17,10 @@ window.CHRYSALIS_CONFIG = {
 };
 
 /* ==========================================================
-   TEMPORARY OCTOBER CALENDAR EMBED + HERO TUNING
+   TEMPORARY OCTOBER GOOGLE CALENDAR EMBED + HERO TUNING
 
-   The existing custom calendar stays in the DOM (hidden) so app.js keeps
-   working normally. The public-facing calendar and upcoming-events areas
-   use the venue's live Google Calendar for October 2026.
+   The custom Chrysalis calendar stays hidden underneath so we can switch
+   back to the custom UI once a Google Calendar API key is available.
    ========================================================== */
 
 (() => {
@@ -32,7 +29,9 @@ window.CHRYSALIS_CONFIG = {
   const style = document.createElement("style");
   style.id = "chrysalis-live-calendar-overrides";
   style.textContent = `
-    /* smaller hero */
+    /* ------------------------------------------------------
+       Smaller hero
+       ------------------------------------------------------ */
     .hero-center {
       padding: 3.65rem 0 1.6rem;
     }
@@ -64,33 +63,71 @@ window.CHRYSALIS_CONFIG = {
       max-height: 82px;
     }
 
-    /* live Google Calendar */
+    /* ------------------------------------------------------
+       Google Calendar shell
+       ------------------------------------------------------ */
     .google-calendar-embed,
     .google-agenda-embed {
-      overflow: hidden;
+      width: 100%;
+      min-width: 0;
       border: 1px solid var(--ink);
       background: var(--panel-bg);
+    }
+
+    .google-calendar-embed {
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
     }
 
     .google-calendar-embed iframe,
     .google-agenda-embed iframe {
       display: block;
-      width: 100%;
       border: 0;
       background: #fff;
     }
 
     .google-calendar-embed iframe {
+      width: 100%;
       height: 680px;
     }
 
+    /* Upcoming events gets the full section width instead of being squeezed
+       into the center column between the speaker GIFs. */
+    .speaker-stage {
+      display: grid !important;
+      grid-template-columns: 1fr auto 1fr !important;
+      grid-template-areas:
+        "left smile right"
+        "events events events" !important;
+      column-gap: 14px !important;
+      row-gap: 14px !important;
+      align-items: center !important;
+    }
+
+    .speaker-left {
+      grid-area: left !important;
+      justify-self: end !important;
+    }
+
+    .speaker-right {
+      grid-area: right !important;
+      justify-self: start !important;
+    }
+
     .google-agenda-embed {
-      grid-column: 2;
-      min-width: 0;
+      grid-area: events !important;
+      grid-column: 1 / -1 !important;
+      width: 100% !important;
+      min-width: 100% !important;
+      overflow: hidden;
     }
 
     .google-agenda-embed iframe {
-      height: 510px;
+      width: 100% !important;
+      min-width: 100% !important;
+      max-width: 100% !important;
+      height: 620px;
     }
 
     .calendar-live-note {
@@ -99,6 +136,13 @@ window.CHRYSALIS_CONFIG = {
       font-family: "Courier New", monospace;
       font-size: 10px;
       text-align: right;
+    }
+
+    .calendar-usage-note {
+      margin: .7rem 0 0;
+      color: var(--muted);
+      font-family: "Courier New", monospace;
+      font-size: 10px;
     }
 
     html[data-theme="dark"] .google-calendar-embed iframe,
@@ -147,21 +191,46 @@ window.CHRYSALIS_CONFIG = {
         max-height: 62px;
       }
 
+      /* Google's month grid becomes unreadable when squeezed to ~390px.
+         Give it a desktop-ish canvas and let the visitor swipe horizontally. */
       .google-calendar-embed iframe {
-        height: 560px;
+        width: 760px !important;
+        min-width: 760px !important;
+        max-width: none !important;
+        height: 600px;
+      }
+
+      .speaker-stage {
+        width: 100% !important;
+        grid-template-columns: 1fr auto 1fr !important;
+        grid-template-areas:
+          "left smile right"
+          "events events events" !important;
+        column-gap: 10px !important;
+        row-gap: 10px !important;
+      }
+
+      .speaker-smiley {
+        grid-area: smile !important;
       }
 
       .google-agenda-embed {
-        grid-area: events;
-        grid-column: auto;
-        width: 100%;
+        grid-area: events !important;
+        grid-column: 1 / -1 !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
       }
 
       .google-agenda-embed iframe {
-        height: 460px;
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        height: 540px;
       }
 
-      .calendar-live-note {
+      .calendar-live-note,
+      .calendar-usage-note {
         text-align: left;
       }
     }
@@ -192,7 +261,7 @@ window.CHRYSALIS_CONFIG = {
   const calendarShell = document.querySelector("#calendar .calendar-shell");
 
   if (calendarShell && !document.querySelector(".google-calendar-embed")) {
-    // Keep the old custom calendar alive for app.js, but don't show its demo data.
+    // Keep the old custom calendar alive for app.js, but don't expose demo data.
     calendarShell.hidden = true;
     calendarShell.setAttribute("aria-hidden", "true");
 
@@ -207,12 +276,19 @@ window.CHRYSALIS_CONFIG = {
       ></iframe>
     `;
 
-    const note = document.createElement("p");
-    note.className = "calendar-live-note";
-    note.textContent = "October is live — November is still in progress.";
+    const usageNote = document.createElement("p");
+    usageNote.className = "calendar-usage-note";
+    usageNote.textContent = window.matchMedia("(max-width: 650px)").matches
+      ? "Swipe the calendar left / right to read event names. Full event listings are below."
+      : "Full event listings are below under Upcoming events.";
+
+    const liveNote = document.createElement("p");
+    liveNote.className = "calendar-live-note";
+    liveNote.textContent = "October is live — November is still in progress.";
 
     calendarShell.insertAdjacentElement("afterend", embed);
-    embed.insertAdjacentElement("afterend", note);
+    embed.insertAdjacentElement("afterend", usageNote);
+    usageNote.insertAdjacentElement("afterend", liveNote);
   }
 
   const eventsList = document.querySelector("#eventsList");

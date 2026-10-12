@@ -1,12 +1,12 @@
 window.CHRYSALIS_CONFIG = {
   calendar: {
-    // Temporary public embed while we wait on a Calendar API key.
     calendarId: "chrysalisdenver@gmail.com",
+    apiKey: "",
     timeZone: "America/Denver",
     displayStart: "2026-10-01",
     displayEnd: "2026-10-31",
     maxPublicEventsPerDay: 2,
-    useGoogleCalendar: false
+    useGoogleCalendar: true
   },
 
   photos: {
@@ -17,21 +17,26 @@ window.CHRYSALIS_CONFIG = {
 };
 
 /* ==========================================================
-   TEMPORARY OCTOBER GOOGLE CALENDAR EMBED + HERO TUNING
+   TEMPORARY OCTOBER GOOGLE CALENDAR FALLBACK + HERO TUNING
 
-   The custom Chrysalis calendar stays hidden underneath so we can switch
-   back to the custom UI once a Google Calendar API key is available.
+   If apiKey is blank, the site temporarily shows Google's embedded calendar.
+   As soon as a browser-restricted Calendar API key is added above, this block
+   stops inserting the iframe and the existing custom Chrysalis calendar in
+   app.js takes over automatically.
    ========================================================== */
 
 (() => {
   const calendar = window.CHRYSALIS_CONFIG.calendar;
+  const hasApiKey = Boolean(
+    calendar.apiKey &&
+    calendar.apiKey.trim() &&
+    !calendar.apiKey.includes("YOUR_")
+  );
 
   const style = document.createElement("style");
   style.id = "chrysalis-live-calendar-overrides";
   style.textContent = `
-    /* ------------------------------------------------------
-       Smaller hero
-       ------------------------------------------------------ */
+    /* smaller hero */
     .hero-center {
       padding: 3.65rem 0 1.6rem;
     }
@@ -61,93 +66,6 @@ window.CHRYSALIS_CONFIG = {
     .gif-strip img:nth-child(11),
     .gif-strip img:nth-child(12) {
       max-height: 82px;
-    }
-
-    /* ------------------------------------------------------
-       Google Calendar shell
-       ------------------------------------------------------ */
-    .google-calendar-embed,
-    .google-agenda-embed {
-      width: 100%;
-      min-width: 0;
-      border: 1px solid var(--ink);
-      background: var(--panel-bg);
-    }
-
-    .google-calendar-embed {
-      overflow-x: auto;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .google-calendar-embed iframe,
-    .google-agenda-embed iframe {
-      display: block;
-      border: 0;
-      background: #fff;
-    }
-
-    .google-calendar-embed iframe {
-      width: 100%;
-      height: 680px;
-    }
-
-    /* Upcoming events gets the full section width instead of being squeezed
-       into the center column between the speaker GIFs. */
-    .speaker-stage {
-      display: grid !important;
-      grid-template-columns: 1fr auto 1fr !important;
-      grid-template-areas:
-        "left smile right"
-        "events events events" !important;
-      column-gap: 14px !important;
-      row-gap: 14px !important;
-      align-items: center !important;
-    }
-
-    .speaker-left {
-      grid-area: left !important;
-      justify-self: end !important;
-    }
-
-    .speaker-right {
-      grid-area: right !important;
-      justify-self: start !important;
-    }
-
-    .google-agenda-embed {
-      grid-area: events !important;
-      grid-column: 1 / -1 !important;
-      width: 100% !important;
-      min-width: 100% !important;
-      overflow: hidden;
-    }
-
-    .google-agenda-embed iframe {
-      width: 100% !important;
-      min-width: 100% !important;
-      max-width: 100% !important;
-      height: 620px;
-    }
-
-    .calendar-live-note {
-      margin: .7rem 0 0;
-      color: var(--muted);
-      font-family: "Courier New", monospace;
-      font-size: 10px;
-      text-align: right;
-    }
-
-    .calendar-usage-note {
-      margin: .7rem 0 0;
-      color: var(--muted);
-      font-family: "Courier New", monospace;
-      font-size: 10px;
-    }
-
-    html[data-theme="dark"] .google-calendar-embed iframe,
-    html[data-theme="dark"] .google-agenda-embed iframe {
-      filter: invert(.92) hue-rotate(180deg) saturate(.82) brightness(.9) contrast(.96);
     }
 
     @media (max-width: 650px) {
@@ -190,9 +108,95 @@ window.CHRYSALIS_CONFIG = {
       .gif-strip img:nth-child(12) {
         max-height: 62px;
       }
+    }
+  `;
+  document.head.appendChild(style);
 
-      /* Google's month grid becomes unreadable when squeezed to ~390px.
-         Give it a desktop-ish canvas and let the visitor swipe horizontally. */
+  if (hasApiKey) return;
+
+  const fallbackStyle = document.createElement("style");
+  fallbackStyle.id = "chrysalis-google-embed-fallback";
+  fallbackStyle.textContent = `
+    .google-calendar-embed,
+    .google-agenda-embed {
+      width: 100%;
+      min-width: 0;
+      border: 1px solid var(--ink);
+      background: var(--panel-bg);
+    }
+
+    .google-calendar-embed {
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .google-calendar-embed iframe,
+    .google-agenda-embed iframe {
+      display: block;
+      border: 0;
+      background: #fff;
+    }
+
+    .google-calendar-embed iframe {
+      width: 100%;
+      height: 680px;
+    }
+
+    .speaker-stage {
+      display: grid !important;
+      grid-template-columns: 1fr auto 1fr !important;
+      grid-template-areas:
+        "left smile right"
+        "events events events" !important;
+      column-gap: 14px !important;
+      row-gap: 14px !important;
+      align-items: center !important;
+    }
+
+    .speaker-left {
+      grid-area: left !important;
+      justify-self: end !important;
+    }
+
+    .speaker-right {
+      grid-area: right !important;
+      justify-self: start !important;
+    }
+
+    .google-agenda-embed {
+      grid-area: events !important;
+      grid-column: 1 / -1 !important;
+      width: 100% !important;
+      min-width: 100% !important;
+      overflow: hidden;
+    }
+
+    .google-agenda-embed iframe {
+      width: 100% !important;
+      min-width: 100% !important;
+      max-width: 100% !important;
+      height: 620px;
+    }
+
+    .calendar-live-note,
+    .calendar-usage-note {
+      margin: .7rem 0 0;
+      color: var(--muted);
+      font-family: "Courier New", monospace;
+      font-size: 10px;
+    }
+
+    .calendar-live-note {
+      text-align: right;
+    }
+
+    html[data-theme="dark"] .google-calendar-embed iframe,
+    html[data-theme="dark"] .google-agenda-embed iframe {
+      filter: invert(.92) hue-rotate(180deg) saturate(.82) brightness(.9) contrast(.96);
+    }
+
+    @media (max-width: 650px) {
       .google-calendar-embed iframe {
         width: 760px !important;
         min-width: 760px !important;
@@ -235,7 +239,7 @@ window.CHRYSALIS_CONFIG = {
       }
     }
   `;
-  document.head.appendChild(style);
+  document.head.appendChild(fallbackStyle);
 
   function compactDate(dateString) {
     return dateString.replaceAll("-", "");
@@ -261,7 +265,6 @@ window.CHRYSALIS_CONFIG = {
   const calendarShell = document.querySelector("#calendar .calendar-shell");
 
   if (calendarShell && !document.querySelector(".google-calendar-embed")) {
-    // Keep the old custom calendar alive for app.js, but don't expose demo data.
     calendarShell.hidden = true;
     calendarShell.setAttribute("aria-hidden", "true");
 
@@ -294,8 +297,6 @@ window.CHRYSALIS_CONFIG = {
   const eventsList = document.querySelector("#eventsList");
 
   if (eventsList && !document.querySelector(".google-agenda-embed")) {
-    // app.js can continue rendering into this hidden element without exposing
-    // the old sample-event fallback to visitors.
     eventsList.hidden = true;
     eventsList.setAttribute("aria-hidden", "true");
 

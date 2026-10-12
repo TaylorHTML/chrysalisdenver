@@ -59,6 +59,18 @@
     max-height: 52px !important;
   }
 
+  .calendar-day {
+    min-height: 112px !important;
+  }
+
+  .calendar-event-chip {
+    max-height: none !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    line-height: 1.08 !important;
+    overflow-wrap: break-word;
+  }
+
   .events-list {
     max-height: min(430px, 58vh);
     padding: 0 .75rem;

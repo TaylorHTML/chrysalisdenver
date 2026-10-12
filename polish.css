@@ -41,6 +41,10 @@
 }
 
 @media (max-width: 650px) {
+  .theme-toggle {
+    display: none !important;
+  }
+
   .hero-center {
     padding-top: 1.8rem !important;
   }

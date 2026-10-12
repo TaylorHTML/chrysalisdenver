@@ -40,10 +40,10 @@ updateThemeUI();
 
 const polishStylesheet = document.createElement("link");
 polishStylesheet.rel = "stylesheet";
-polishStylesheet.href = "polish.css?v=2";
+polishStylesheet.href = "polish.css?v=3";
 document.head.appendChild(polishStylesheet);
 
 const polishScript = document.createElement("script");
-polishScript.src = "polish.js?v=2";
+polishScript.src = "polish.js?v=3";
 polishScript.async = false;
 document.body.appendChild(polishScript);

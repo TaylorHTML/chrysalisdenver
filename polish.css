@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap");
+
+.hero-center {
+  padding-top: 2.8rem !important;
+}
+
+.hero-subtitle {
+  margin: .7rem 0 1.45rem !important;
+  font-family: "UnifrakturCook", "Old English Text MT", "Engravers Old English", serif !important;
+  font-size: clamp(2.2rem, 4.8vw, 3.8rem) !important;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: .02em !important;
+}
+
+.banner-radioactive {
+  max-width: 88px !important;
+  max-height: 72px !important;
+}
+
+.request-slot {
+  display: none !important;
+}
+
+.events-list {
+  max-height: min(520px, 62vh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
+  padding: 0 1rem;
+  border: 1px solid var(--ink) !important;
+  background: var(--panel-bg);
+}
+
+.event-row:last-child {
+  border-bottom: 0;
+}
+
+#dialogDescription:empty,
+#dialogDescription[hidden] {
+  display: none;
+}
+
+@media (max-width: 650px) {
+  .hero-center {
+    padding-top: 1.8rem !important;
+  }
+
+  .hero-subtitle {
+    margin: .55rem 0 1rem !important;
+    font-size: clamp(2rem, 10vw, 3rem) !important;
+  }
+
+  .banner-radioactive {
+    max-width: 62px !important;
+    max-height: 52px !important;
+  }
+
+  .events-list {
+    max-height: min(430px, 58vh);
+    padding: 0 .75rem;
+  }
+}

@@ -1,16 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap");
 
 .hero-center {
   padding-top: 2.8rem !important;
 }
 
 .hero-subtitle {
-  margin: .7rem 0 1.45rem !important;
-  font-family: "UnifrakturCook", "Old English Text MT", "Engravers Old English", serif !important;
-  font-size: clamp(2.2rem, 4.8vw, 3.8rem) !important;
-  font-weight: 700;
+  margin: .65rem 0 1.35rem !important;
+  font-family: "Old English Text MT", "UnifrakturMaguntia", "Engravers Old English", serif !important;
+  font-size: clamp(1.35rem, 2.8vw, 2rem) !important;
+  font-weight: 400;
   line-height: 1;
-  letter-spacing: .02em !important;
+  letter-spacing: .015em !important;
 }
 
 .banner-radioactive {
@@ -48,8 +48,8 @@
   }
 
   .hero-subtitle {
-    margin: .55rem 0 1rem !important;
-    font-size: clamp(2rem, 10vw, 3rem) !important;
+    margin: .5rem 0 .95rem !important;
+    font-size: clamp(1.25rem, 6vw, 1.7rem) !important;
   }
 
   .banner-radioactive {

@@ -40,6 +40,11 @@
   display: none;
 }
 
+.mobile-event-count,
+.mobile-day-events {
+  display: none;
+}
+
 @media (max-width: 650px) {
   .theme-toggle {
     display: none !important;
@@ -60,15 +65,79 @@
   }
 
   .calendar-day {
-    min-height: 112px !important;
+    min-height: 72px !important;
+    padding: 6px 4px !important;
   }
 
-  .calendar-event-chip {
-    max-height: none !important;
-    overflow: visible !important;
-    white-space: normal !important;
-    line-height: 1.08 !important;
-    overflow-wrap: break-word;
+  .calendar-day.has-event:not(.outside-month) {
+    cursor: pointer;
+  }
+
+  .calendar-day.has-event:not(.outside-month):focus-visible,
+  .calendar-day.mobile-selected-day {
+    outline: 0;
+    box-shadow: inset 0 0 0 2px var(--green);
+  }
+
+  .calendar-event-chip,
+  .calendar-day .full-label {
+    display: none !important;
+  }
+
+  .mobile-event-count {
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    margin-top: 5px;
+    padding: 2px 3px;
+    border: 1px solid var(--green);
+    background: rgba(25,214,0,.14);
+    color: var(--ink);
+    font-family: "Courier New", monospace;
+    font-size: 6.5px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  .mobile-day-events {
+    display: none;
+    padding: 12px;
+    border-top: 1px solid var(--ink);
+    background: var(--panel-bg);
+  }
+
+  .mobile-day-events.is-open {
+    display: block;
+  }
+
+  .mobile-day-events-heading {
+    margin: 0 0 9px;
+    color: var(--muted);
+    font-family: "Courier New", monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+
+  .mobile-day-event-button {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    border: 0;
+    border-top: 1px dotted var(--line);
+    background: transparent;
+    color: var(--blue);
+    text-align: left;
+    cursor: pointer;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1.15rem;
+    line-height: 1.1;
+    text-decoration: underline;
+  }
+
+  .mobile-day-event-button:last-child {
+    border-bottom: 1px dotted var(--line);
   }
 
   .events-list {

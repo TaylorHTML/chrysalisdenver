@@ -1,7 +1,7 @@
 window.CHRYSALIS_CONFIG = {
   calendar: {
     calendarId: "chrysalisdenver@gmail.com",
-    apiKey: "",
+    apiKey: "AIzaSyDnzuMrK62ZfRVrBGikkmMEJU2DLS7-Nks",
     timeZone: "America/Denver",
     displayStart: "2026-10-01",
     displayEnd: "2026-10-31",

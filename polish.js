@@ -20,6 +20,15 @@
   const openSlotKey = document.querySelector(".key-open");
   openSlotKey?.closest("span")?.remove();
 
+  const bookingDescription = document.querySelector("#booking .section-heading > p");
+
+  if (bookingDescription) {
+    bookingDescription.innerHTML = `
+      Propose a complete show or join the artist pool for future Chrysalis lineups.<br>
+      Questions? <a href="mailto:chrysalisdenver@gmail.com">chrysalisdenver@gmail.com</a>
+    `;
+  }
+
   const aboutLinks = document.querySelector(".about-links");
 
   if (aboutLinks) {

@@ -40,7 +40,7 @@ updateThemeUI();
 
 const polishStylesheet = document.createElement("link");
 polishStylesheet.rel = "stylesheet";
-polishStylesheet.href = "polish.css?v=4";
+polishStylesheet.href = "polish.css?v=5";
 document.head.appendChild(polishStylesheet);
 
 const polishScript = document.createElement("script");

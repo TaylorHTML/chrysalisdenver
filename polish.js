@@ -75,66 +75,27 @@
 
   /* ========================================================
      MOBILE CALENDAR
-     Keep the month grid compact. Event days show a clear
-     count badge; tapping the whole day reveals readable event
-     titles underneath the grid.
+     Event days stay compact. Tapping the whole date cell opens
+     the existing event-details modal directly.
      ======================================================== */
 
   const calendarGrid = document.querySelector("#calendarGrid");
   const calendarTitle = document.querySelector("#calendarTitle");
 
   if (calendarGrid) {
-    let mobileDayPanel = document.querySelector("#mobileDayEvents");
-
-    if (!mobileDayPanel) {
-      mobileDayPanel = document.createElement("section");
-      mobileDayPanel.id = "mobileDayEvents";
-      mobileDayPanel.className = "mobile-day-events";
-      mobileDayPanel.setAttribute("aria-live", "polite");
-      calendarGrid.insertAdjacentElement("afterend", mobileDayPanel);
-    }
-
     function selectedDateLabel(cell) {
       const day = cell.querySelector(".day-number")?.textContent?.trim() || "";
       const monthYear = calendarTitle?.textContent?.trim() || "";
       return day && monthYear ? `${monthYear} ${day}` : monthYear;
     }
 
-    function showMobileDayEvents(cell) {
+    function openMobileCalendarEvent(cell) {
       if (window.innerWidth > 650) return;
 
-      const sourceButtons = [...cell.querySelectorAll(".calendar-event-chip")];
-      if (!sourceButtons.length) return;
+      const sourceButton = cell.querySelector(".calendar-event-chip");
+      if (!sourceButton) return;
 
-      document.querySelectorAll(".calendar-day.mobile-selected-day").forEach(day => {
-        day.classList.remove("mobile-selected-day");
-      });
-      cell.classList.add("mobile-selected-day");
-
-      mobileDayPanel.innerHTML = "";
-
-      const heading = document.createElement("p");
-      heading.className = "mobile-day-events-heading";
-      heading.textContent = selectedDateLabel(cell);
-      mobileDayPanel.appendChild(heading);
-
-      sourceButtons.forEach(sourceButton => {
-        const eventButton = document.createElement("button");
-        eventButton.type = "button";
-        eventButton.className = "mobile-day-event-button";
-        eventButton.textContent = sourceButton.textContent.trim();
-        eventButton.addEventListener("click", () => sourceButton.click());
-        mobileDayPanel.appendChild(eventButton);
-      });
-
-      mobileDayPanel.classList.add("is-open");
-
-      requestAnimationFrame(() => {
-        mobileDayPanel.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest"
-        });
-      });
+      sourceButton.click();
     }
 
     function enhanceMobileCalendar() {
@@ -160,18 +121,18 @@
         cell.tabIndex = 0;
         cell.setAttribute(
           "aria-label",
-          `${selectedDateLabel(cell)}, ${eventCount} ${eventCount === 1 ? "event" : "events"}. Tap to view.`
+          `${selectedDateLabel(cell)}, ${eventCount} ${eventCount === 1 ? "event" : "events"}. Tap to open details.`
         );
 
         cell.addEventListener("click", event => {
           if (event.target.closest(".calendar-event-chip")) return;
-          showMobileDayEvents(cell);
+          openMobileCalendarEvent(cell);
         });
 
         cell.addEventListener("keydown", event => {
           if (event.key !== "Enter" && event.key !== " ") return;
           event.preventDefault();
-          showMobileDayEvents(cell);
+          openMobileCalendarEvent(cell);
         });
       });
     }
@@ -193,16 +154,7 @@
       subtree: true
     });
 
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 650) {
-        mobileDayPanel.classList.remove("is-open");
-        document.querySelectorAll(".calendar-day.mobile-selected-day").forEach(day => {
-          day.classList.remove("mobile-selected-day");
-        });
-      }
-      scheduleEnhancement();
-    });
-
+    window.addEventListener("resize", scheduleEnhancement);
     scheduleEnhancement();
   }
 })();

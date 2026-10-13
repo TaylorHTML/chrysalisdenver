@@ -12,26 +12,38 @@
   letter-spacing: .22em !important;
 }
 
-/* Match the moving GIF banner to the same max width as the site sections. */
-.gif-marquee {
-  width: min(var(--max), 100%) !important;
-  max-width: none !important;
-}
-
-/* Keep the banner dense while letting more GIFs show at once. */
-.gif-strip img {
-  max-width: 132px !important;
-  max-height: 88px !important;
-}
-
-.gif-strip img:nth-child(11),
-.gif-strip img:nth-child(12) {
-  max-height: 96px !important;
-}
-
 .banner-radioactive {
-  max-width: 78px !important;
-  max-height: 64px !important;
+  max-width: 88px !important;
+  max-height: 72px !important;
+}
+
+/* Desktop only: align the marquee exactly with the main sections,
+   use slightly smaller GIFs, and let app.js own the transform so
+   reversing direction does not jump. */
+@media (min-width: 651px) {
+  .gif-marquee {
+    width: min(var(--max), calc(100vw - 28px)) !important;
+    max-width: none !important;
+  }
+
+  .gif-marquee-track {
+    animation: none !important;
+  }
+
+  .gif-strip img {
+    max-width: 140px !important;
+    max-height: 92px !important;
+  }
+
+  .gif-strip img:nth-child(11),
+  .gif-strip img:nth-child(12) {
+    max-height: 100px !important;
+  }
+
+  .banner-radioactive {
+    max-width: 80px !important;
+    max-height: 66px !important;
+  }
 }
 
 /* Pull the first section closer to the GIF banner. */
@@ -125,19 +137,9 @@
     font-size: clamp(.95rem, 4.6vw, 1.35rem) !important;
   }
 
-  .gif-strip img {
-    max-width: 108px !important;
-    max-height: 72px !important;
-  }
-
-  .gif-strip img:nth-child(11),
-  .gif-strip img:nth-child(12) {
-    max-height: 78px !important;
-  }
-
   .banner-radioactive {
-    max-width: 56px !important;
-    max-height: 47px !important;
+    max-width: 62px !important;
+    max-height: 52px !important;
   }
 
   #calendar {

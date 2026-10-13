@@ -12,9 +12,26 @@
   letter-spacing: .22em !important;
 }
 
+/* Match the moving GIF banner to the same max width as the site sections. */
+.gif-marquee {
+  width: min(var(--max), 100%) !important;
+  max-width: none !important;
+}
+
+/* Keep the banner dense while letting more GIFs show at once. */
+.gif-strip img {
+  max-width: 132px !important;
+  max-height: 88px !important;
+}
+
+.gif-strip img:nth-child(11),
+.gif-strip img:nth-child(12) {
+  max-height: 96px !important;
+}
+
 .banner-radioactive {
-  max-width: 88px !important;
-  max-height: 72px !important;
+  max-width: 78px !important;
+  max-height: 64px !important;
 }
 
 /* Pull the first section closer to the GIF banner. */
@@ -108,9 +125,19 @@
     font-size: clamp(.95rem, 4.6vw, 1.35rem) !important;
   }
 
+  .gif-strip img {
+    max-width: 108px !important;
+    max-height: 72px !important;
+  }
+
+  .gif-strip img:nth-child(11),
+  .gif-strip img:nth-child(12) {
+    max-height: 78px !important;
+  }
+
   .banner-radioactive {
-    max-width: 62px !important;
-    max-height: 52px !important;
+    max-width: 56px !important;
+    max-height: 47px !important;
   }
 
   #calendar {

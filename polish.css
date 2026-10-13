@@ -1,5 +1,6 @@
 .hero-center {
   padding-top: 2.8rem !important;
+  padding-bottom: .8rem !important;
 }
 
 .hero-subtitle {
@@ -14,6 +15,34 @@
 .banner-radioactive {
   max-width: 88px !important;
   max-height: 72px !important;
+}
+
+/* Pull the first section closer to the GIF banner. */
+#calendar {
+  padding-top: 3.25rem !important;
+}
+
+/* Reduce the whitespace around the chain separators without
+   changing the spacing inside each section. */
+#calendar,
+#events,
+#photos,
+#booking {
+  padding-bottom: 3.5rem !important;
+}
+
+.chain-break + .site-section {
+  padding-top: 3.5rem !important;
+}
+
+.chain-break {
+  padding-top: 5px !important;
+  padding-bottom: 4px !important;
+}
+
+/* Restore the small divider above the footer. */
+.site-footer {
+  border-top: 1px solid var(--soft-line);
 }
 
 .request-slot {
@@ -50,8 +79,28 @@
     display: none !important;
   }
 
+  .site-header {
+    min-height: 0 !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    gap: .2rem !important;
+  }
+
+  .nav-logo {
+    width: 96px !important;
+  }
+
+  .site-nav {
+    gap: .55rem !important;
+  }
+
+  .hero {
+    padding-top: 62px !important;
+  }
+
   .hero-center {
-    padding-top: 1.8rem !important;
+    padding-top: 1.5rem !important;
+    padding-bottom: .45rem !important;
   }
 
   .hero-subtitle {
@@ -62,6 +111,26 @@
   .banner-radioactive {
     max-width: 62px !important;
     max-height: 52px !important;
+  }
+
+  #calendar {
+    padding-top: 2rem !important;
+  }
+
+  #calendar,
+  #events,
+  #photos,
+  #booking {
+    padding-bottom: 2.25rem !important;
+  }
+
+  .chain-break + .site-section {
+    padding-top: 2.25rem !important;
+  }
+
+  .chain-break {
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
   }
 
   .calendar-day {
@@ -103,41 +172,6 @@
 
   .mobile-day-events {
     display: none;
-    padding: 12px;
-    border-top: 1px solid var(--ink);
-    background: var(--panel-bg);
-  }
-
-  .mobile-day-events.is-open {
-    display: block;
-  }
-
-  .mobile-day-events-heading {
-    margin: 0 0 9px;
-    color: var(--muted);
-    font-family: "Courier New", monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-  }
-
-  .mobile-day-event-button {
-    display: block;
-    width: 100%;
-    padding: 10px 0;
-    border: 0;
-    border-top: 1px dotted var(--line);
-    background: transparent;
-    color: var(--blue);
-    text-align: left;
-    cursor: pointer;
-    font-family: "Times New Roman", Times, serif;
-    font-size: 1.15rem;
-    line-height: 1.1;
-    text-decoration: underline;
-  }
-
-  .mobile-day-event-button:last-child {
-    border-bottom: 1px dotted var(--line);
   }
 
   .events-list {

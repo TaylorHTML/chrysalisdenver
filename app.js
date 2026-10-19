@@ -661,7 +661,10 @@ function submitArtistPoolForm(event) {
     sendingLabel: "JOINING...",
     idleLabel: "JOIN ARTIST POOL",
     successMessage:
-      "YOU'RE IN THE ARTIST POOL. Chrysalis may contact you when your project fits a future lineup."
+      "YOU'RE IN THE ARTIST POOL. Chrysalis may contact you when your project fits a future lineup.",
+    onSuccess: () => {
+      bookingConfirmationDialog?.showModal();
+    }
   });
 }
 

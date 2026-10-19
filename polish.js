@@ -24,9 +24,8 @@
 
   if (bookingDescription) {
     bookingDescription.innerHTML = `
-      Propose a complete show or join the artist pool for future Chrysalis lineups.<br>
-      Questions? <a href="mailto:chrysalisdenver@gmail.com">chrysalisdenver@gmail.com</a><br>
-      <a href="policies.html">rules + policies</a>
+      Propose a complete show or join the artist pool for future Chrysalis lineups. <a href="policies.html">rules + policies</a><br>
+      Questions? <a href="mailto:chrysalisdenver@gmail.com">chrysalisdenver@gmail.com</a>
     `;
   }
 

@@ -461,11 +461,6 @@
               <textarea name="artist_description" rows="5" required></textarea>
             </label>
 
-            <label class="full pool-consent">
-              <input type="checkbox" name="opening_slot_interest" value="Yes" required>
-              <span>I want to be considered for future Chrysalis lineups and opening slots. *</span>
-            </label>
-
             <div class="form-footer full">
               <p>This adds you to a private artist pool. It is not a confirmed booking.</p>
               <button id="artistPoolSubmit" type="submit">JOIN ARTIST POOL</button>
@@ -565,22 +560,17 @@
       aria-label="Close booking confirmation"
     >×</button>
 
-    <p class="dialog-kicker">BOOKING</p>
+    <p class="dialog-kicker">SUBMISSION</p>
     <h2>REQUEST RECEIVED ★</h2>
     <p>
-      Your booking request was sent successfully. This does not confirm your date.
-      Chrysalis will follow up if the event is a fit.
+      Your submission was sent successfully. This does not confirm a booking or date.
+      Chrysalis will follow up if it is a fit.
     </p>
 
-    <p id="bookingPoliciesPending">
-      Chrysalis rules + policies will be added here once they are finalized.
+    <p>
+      Please review the Chrysalis
+      <a id="bookingPoliciesLink" href="policies.html">rules + policies</a>.
     </p>
-
-    <a
-      id="bookingPoliciesLink"
-      class="view-gallery-button"
-      href="policies.html"
-    >READ RULES + POLICIES →</a>
   </dialog>
 
   <dialog id="photoDialog" class="photo-dialog">
@@ -612,6 +602,6 @@
 
   <script src="theme.js?v=1"></script>
   <script src="config.js?v=12"></script>
-  <script src="app.js?v=13"></script>
+  <script src="app.js?v=14"></script>
 </body>
 </html>

@@ -557,6 +557,33 @@
     <p id="dialogDescription"></p>
   </dialog>
 
+  <dialog id="bookingConfirmationDialog" class="event-dialog booking-confirmation-dialog">
+    <button
+      id="closeBookingConfirmation"
+      class="dialog-close"
+      type="button"
+      aria-label="Close booking confirmation"
+    >×</button>
+
+    <p class="dialog-kicker">BOOKING</p>
+    <h2>REQUEST RECEIVED ★</h2>
+    <p>
+      Your booking request was sent successfully. This does not confirm your date.
+      Chrysalis will follow up if the event is a fit.
+    </p>
+
+    <p id="bookingPoliciesPending">
+      Chrysalis rules + policies will be added here once they are finalized.
+    </p>
+
+    <a
+      id="bookingPoliciesLink"
+      class="view-gallery-button"
+      href="policies.html"
+      hidden
+    >READ RULES + POLICIES →</a>
+  </dialog>
+
   <dialog id="photoDialog" class="photo-dialog">
     <button
       id="closePhotoDialog"
@@ -586,6 +613,6 @@
 
   <script src="theme.js?v=1"></script>
   <script src="config.js?v=12"></script>
-  <script src="app.js?v=12"></script>
+  <script src="app.js?v=13"></script>
 </body>
 </html>

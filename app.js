@@ -81,6 +81,8 @@ const photoNext = document.querySelector("#photoNext");
 const bookingForm = document.querySelector("#bookingForm");
 const bookingSubmit = document.querySelector("#bookingSubmit");
 const bookingStatus = document.querySelector("#bookingStatus");
+const bookingConfirmationDialog = document.querySelector("#bookingConfirmationDialog");
+const closeBookingConfirmation = document.querySelector("#closeBookingConfirmation");
 const artistPoolForm = document.querySelector("#artistPoolForm");
 const artistPoolSubmit = document.querySelector("#artistPoolSubmit");
 const artistPoolStatus = document.querySelector("#artistPoolStatus");
@@ -124,6 +126,16 @@ document.querySelector("#todayBtn").addEventListener("click", () => {
 });
 
 closeEventDialog.addEventListener("click", () => eventDialog.close());
+
+closeBookingConfirmation?.addEventListener("click", () => {
+  bookingConfirmationDialog?.close();
+});
+
+bookingConfirmationDialog?.addEventListener("click", event => {
+  if (clickedOutsideDialog(event, bookingConfirmationDialog)) {
+    bookingConfirmationDialog.close();
+  }
+});
 
 bookingForm.addEventListener("submit", submitBookingForm);
 artistPoolForm.addEventListener("submit", submitArtistPoolForm);
@@ -635,7 +647,10 @@ function submitBookingForm(event) {
     sendingLabel: "SENDING...",
     idleLabel: "SEND REQUEST",
     successMessage:
-      "REQUEST RECEIVED. Chrysalis will follow up if the date / event is a fit."
+      "REQUEST RECEIVED. Chrysalis will follow up if the date / event is a fit.",
+    onSuccess: () => {
+      bookingConfirmationDialog?.showModal();
+    }
   });
 }
 
@@ -678,6 +693,7 @@ async function submitFormspreeForm(event, options) {
     form.reset();
     options.status.textContent = options.successMessage;
     options.status.classList.add("success");
+    options.onSuccess?.();
   } catch (error) {
     console.error(error);
     options.status.textContent =

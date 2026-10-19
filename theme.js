@@ -66,6 +66,6 @@ polishStylesheet.href = "polish.css?v=5";
 document.head.appendChild(polishStylesheet);
 
 const polishScript = document.createElement("script");
-polishScript.src = "polish.js?v=4";
+polishScript.src = "polish.js?v=5";
 polishScript.async = false;
 document.body.appendChild(polishScript);

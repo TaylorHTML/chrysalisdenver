@@ -1058,6 +1058,12 @@ textarea {
   line-height: .9;
 }
 
+.booking-confirmation-dialog p:not(.dialog-kicker) {
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 .event-flyer-modal {
   display: block;
   max-width: min(100%,440px);
